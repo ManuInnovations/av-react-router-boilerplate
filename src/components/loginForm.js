@@ -27,7 +27,25 @@ class loginForm extends React.Component{
   handleClick(e){
     //by default button onClicks will want to refresh the page and eventListener
     e.preventDefault()
-    this.props.router.push(`/`)
+
+    const webhookdata = {
+      "type": "text",
+      "text": "A big juicy steak.",
+      "field": {
+        "id": "12345",
+        "type": "short_text"
+      }
+  }
+    request.post('api/v1/login')
+    .send(webhookdata)
+    .end((err,response)=>{
+      if(err){
+        console.log('error in loginform', err);
+      } else{
+        console.log(response);
+        this.props.router.push(`/`)
+      }
+    })
   }
 
 
